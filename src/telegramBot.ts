@@ -27,12 +27,6 @@ bot.onText(/\/start/, async (msg: TelegramBot.Message) => {
     .eq('id', userId)
     .single();
 
-  if (error && error.details !== 'JSON object requested, multiple (or no) rows returned') {
-    console.error('Error fetching user:', error);
-    bot.sendMessage(chatId, 'Error fetching user data.');
-    return;
-  }
-
   if (!data) {
     // Insert new user
     const { error: insertError } = await supabase
